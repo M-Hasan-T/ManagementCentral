@@ -12,11 +12,11 @@
     }
     public class Device
     {
-        Guid DeviceId { get; set; }
-        Location Location { get; set; }
+        public Guid DeviceId { get; set; }
+        public Location Location { get; set; }
 
-        DateTime Date { get; set; }
-        string DeviceType { get; set; } = string.Empty;
-        Status Status { get; set; }
+        public DateTime Date { get; set; }
+        public string DeviceType { get; set; } = string.Empty;
+        public Status Status { get; set; }
     }
 }

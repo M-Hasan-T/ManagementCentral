@@ -1,5 +1,25 @@
 ﻿<h3>DeviceList</h3>
 
-@code {
-
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Device Id</th>
+            <th scope="col">Location</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var device in DeviceLst)
+        {
+            <tr>
+                <td scope="row">@device.DeviceId</td>
+                <td scope="row">@device.Location</td>
+                <td scope="row">@device.Date</td>
+                <td scope="row">@device.DeviceType</td>
+                <td scope="row">@device.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
