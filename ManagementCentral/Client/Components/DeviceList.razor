@@ -9,6 +9,7 @@
             <th scope="col">Type</th>
             <th scope="col">Status</th>
             <th scope="col">View</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,10 @@
                 <td scope="row">@device.Status</td>
                 <td scope="row"><a href="@($"deviceview/{device.DeviceId}")"
                        class="btn btn-outline-primary">View</a>
+                </td>
+                <td scope="row">
+                    <a href="@($"devicedelete/{device.DeviceId}")"
+                       class="btn btn-outline-primary">Delete</a>
                 </td>
             </tr>
         }
