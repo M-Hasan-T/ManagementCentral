@@ -1,0 +1,24 @@
+﻿@page "/deviceview/{DeviceId}"
+
+<h3>Device</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Device Id</th>
+            <th scope="col">Location</th>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="row">@Device.DeviceId</td>
+            <td scope="row">@Device.Location</td>
+            <td scope="row">@Device.Date.ToString("yyyyy-MM-dd")</td>
+            <td scope="row">@Device.DeviceType</td>
+            <td scope="row">@Device.Status</td>
+        </tr>
+    </tbody>
+</table>
