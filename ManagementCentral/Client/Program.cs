@@ -1,4 +1,5 @@
 using ManagementCentral.Client;
+using ManagementCentral.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -14,5 +15,6 @@ builder.Services.AddHttpClient("ManagementCentral.ServerAPI", client => client.B
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("ManagementCentral.ServerAPI"));
 
 builder.Services.AddApiAuthorization();
+builder.Services.AddSingleton<IDeviceDataService, DeviceDataService>();
 
 await builder.Build().RunAsync();
