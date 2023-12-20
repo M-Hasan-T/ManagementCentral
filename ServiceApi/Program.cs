@@ -1,5 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
+var specOrigin = "MySpecOrigin";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: specOrigin, policy =>
+    {
+        policy.WithOrigins("https://localhost:7026")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -35,6 +46,13 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapGet("/device", () => "Getting a device from API");
+
+app.MapGet("/device/{deviceId}/button/{buttonId}",
+    (int deviceId, int buttonId) => $"DeviceId {deviceId} and ButtonId {buttonId}");
+
+app.UseCors(specOrigin);
 
 app.Run();
 

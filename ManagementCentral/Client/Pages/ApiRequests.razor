@@ -1,0 +1,35 @@
+﻿@page "/apirequests"
+@inject HttpClient Http
+
+<h3>ApiRequests</h3>
+
+<h5>Device from API: @deviceFromApi</h5>
+<button class="btn btn-primary" @onclick="GetDeviceFromAPI">Get Device from API</button>
+
+<h5>Device from API: @deviceAndButtonFromApi</h5>
+<button class="btn btn-primary" @onclick="GetDeviceAndButtonFromAPI">Get Device and Button from API</button>
+
+@code {
+    private string deviceFromApi = string.Empty;
+    private string deviceAndButtonFromApi = string.Empty;
+
+    protected async Task GetDeviceFromAPI()
+    {
+        var response = await Http.GetAsync("/device");
+
+        if (response.IsSuccessStatusCode)
+        {
+            deviceFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    protected async Task GetDeviceAndButtonFromAPI()
+    {
+        var response = await Http.GetAsync("/device/1/button/2");
+
+        if (response.IsSuccessStatusCode)
+        {
+            deviceAndButtonFromApi = await response.Content.ReadAsStringAsync();
+        }
+    }
+}
