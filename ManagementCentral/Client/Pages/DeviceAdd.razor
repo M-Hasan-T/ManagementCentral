@@ -4,6 +4,7 @@
 
 <section class="device-edit">
     <EditForm Model="@Device" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator/>      
         <table class="table">
             <thead>
                 <tr>
@@ -26,6 +27,7 @@
                         </td>
                         <td scope="row">
                             <InputText id="DeviceType" @bind-Value="Device.DeviceType" class="form-control col-md-8"></InputText>
+                            <ValidationMessage For="@(()=>Device.DeviceType)"></ValidationMessage>
                         </td>
                         <td scope="row">
                             <InputSelect id="Status" @bind-Value="Device.Status" class="form-control col-md-8">
