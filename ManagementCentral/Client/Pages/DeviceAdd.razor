@@ -1,6 +1,10 @@
 ﻿@page "/deviceadd"
+@inject HttpClient Http
 
 <h3>Add Device</h3>
+
+responseData: @responseData<br />
+statusCode: @statusCode
 
 <section class="device-edit">
     <EditForm Model="@Device" OnValidSubmit="HandleValidSubmit">

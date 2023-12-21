@@ -7,9 +7,12 @@ namespace DeviceApi.Endpoints
         public static void RegisterUserEndpoints(this IEndpointRouteBuilder routes)
         {
             var devices = routes.MapGroup("");
+
             devices.MapGet("/device", () => "Simple text from API");
+
             devices.MapGet("/devices", () => Collections.Devices.DeviceList);
-            devices.MapGet("/devices/{DeviceId}", (int DeviceId) => Collections.Devices.DeviceList
+
+            devices.MapGet("/device/{DeviceId}", (int DeviceId) => Collections.Devices.DeviceList
             .FirstOrDefault(device => device.DeviceId == DeviceId));
 
             devices.MapPost("/device/add", (Device device) =>
@@ -17,6 +20,7 @@ namespace DeviceApi.Endpoints
                 Random rnd = new Random();
                 device.DeviceId = rnd.Next(100000);
                 Collections.Devices.DeviceList.Add(device);
+                return Results.Accepted("Accepted");
             });
 
             devices.MapPut("/device/edit/{DeviceId}", (int DeviceId, Device device) =>

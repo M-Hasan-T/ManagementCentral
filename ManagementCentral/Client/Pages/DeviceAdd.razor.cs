@@ -1,9 +1,13 @@
 ﻿using ManagementCentral.Client.Services;
 using ManagementCentral.Shared.Domain;
 using Microsoft.AspNetCore.Components;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace ManagementCentral.Client.Pages
 {
+
     public partial class DeviceAdd
     {
         [Inject]
@@ -14,15 +18,23 @@ namespace ManagementCentral.Client.Pages
 
         public Device Device { get; set; } = new Device();
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-        }
+        public string responseData = string.Empty;
 
-        protected async Task HandleValidSubmit()
+        public HttpStatusCode statusCode;
+
+        private async Task HandleValidSubmit()
         {
-            DeviceDataService.AddDevice(Device);
-            NavigationManager.NavigateTo($"/listofdevices");
+            var json = JsonSerializer.Serialize(Device);
+            var httpContent = new StringContent(json, new MediaTypeHeaderValue("application/json"));
+            var response = await Http.PostAsync("/device/add", httpContent);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                responseData = await response.Content.ReadAsStringAsync();
+            }
+
+            statusCode = response.StatusCode;
+
+            //NavigationManager.NavigateTo($"/listofdevices");
         }
     }
 }
