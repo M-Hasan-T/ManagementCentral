@@ -1,4 +1,12 @@
 ﻿@ExtraCaption
+@inject HttpClient Http
+
+@if(Error)
+{
+    <div class="alert alert-danger" role="alert">
+        Error reading from API!
+    </div>
+}
 
 <table class="table">
     <thead>
@@ -38,3 +46,6 @@
     </tbody>
 </table>
 <a href="@($"deviceadd")" class="btn btn-outline-primary">Add New Device</a>
+<br />Return from API: <br />
+@responseData
+<br /><br />

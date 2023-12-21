@@ -12,7 +12,12 @@ namespace DeviceApi.Endpoints
             devices.MapGet("/devices/{DeviceId}", (int DeviceId) => Collections.Devices.DeviceList
             .FirstOrDefault(device => device.DeviceId == DeviceId));
 
-            devices.MapPost("/device/add", (Device device) => Collections.Devices.DeviceList.Add(device));
+            devices.MapPost("/device/add", (Device device) =>
+            {
+                Random rnd = new Random();
+                device.DeviceId = rnd.Next(100000);
+                Collections.Devices.DeviceList.Add(device);
+            });
 
             devices.MapPut("/device/edit/{DeviceId}", (int DeviceId, Device device) =>
             {
