@@ -1,6 +1,16 @@
-﻿@page "/devicedelete/{DeviceId}"
+﻿@page "/devicedelete/{DeviceId:int}"
+@inject HttpClient Http
 
 <h3>Delete Device</h3>
+
+@if (Error)
+{
+    <div class="alert alert-danger" role="alert">
+        Error reading from API!
+    </div>
+}
+
+StatusCode: @statusCode
 
 <table class="table">
     <thead>
@@ -24,4 +34,5 @@
 </table>
 
 <a href="@($"ListOfDevices")" class="btn btn-outline-primary">Back to Device List</a>
-<a class="btn btn-outline-primary" @onclick="()=>Delete(DeviceId)">Delete</a>
+<a class="btn btn-outline-primary" @onclick="()=>Delete()">Delete</a>
+<a class="btn btn-outline-primary" @onclick="()=>DeleteError()">Delete Error</a>

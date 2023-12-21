@@ -1,6 +1,8 @@
 ﻿using ManagementCentral.Client.Services;
 using ManagementCentral.Shared.Domain;
 using Microsoft.AspNetCore.Components;
+using System.Net;
+using System.Text.Json;
 
 namespace ManagementCentral.Client.Pages
 {
@@ -13,18 +15,62 @@ namespace ManagementCentral.Client.Pages
         public NavigationManager NavigationManager { get; set; }
 
         [Parameter]
-        public string DeviceId { get; set; }
-        public Device Device { get; set; }
+        public int? DeviceId { get; set; }
 
-        protected override void OnInitialized()
+        public Device Device { get; set; } = new Device();
+
+        public HttpStatusCode statusCode;
+
+        public string responseData = string.Empty;
+
+        public bool Error = false;
+        protected override async Task OnInitializedAsync()
         {
-            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));
+            if (DeviceId.HasValue)
+            {
+                var response = await Http.GetAsync("/device/" + DeviceId);
+                if (response.IsSuccessStatusCode)
+                {
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        PropertyNameCaseInsensitive = true,
+                    };
+
+                    responseData = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseData))
+                    {
+                        Device = JsonSerializer.Deserialize<Device>(responseData, options);
+                    }
+
+                }
+                else { Error = true; }
+                await base.OnInitializedAsync();
+            }
+            else
+            {
+
+            }
         }
 
-        protected void Delete(string DeviceId)
+        protected async Task Delete()
         {
-            DeviceDataService.DeleteDevice(int.Parse(DeviceId));
-            NavigationManager.NavigateTo($"/listofdevices");
+            var response = await Http.DeleteAsync("/device/delete/" + Device.DeviceId);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                //NavigationManager.NavigateTo($"/listofdevices");
+            }
+            else
+            {
+
+            }
+            statusCode = response.StatusCode;
+        }
+
+        protected async Task DeleteError()
+        {
+            var response = await Http.DeleteAsync("/device/delete/11");
+            statusCode = response.StatusCode;
         }
     }
 }

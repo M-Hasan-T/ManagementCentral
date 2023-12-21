@@ -11,8 +11,8 @@ namespace ManagementCentral.Client.Pages
         public IDeviceDataService? DeviceDataService { get; set; }
 
         [Parameter]
-        public string DeviceId { get; set; }
-        public Device Device { get; set; }
+        public int DeviceId { get; set; }
+        public Device Device { get; set; } = new Device();
         public string responseData = string.Empty;
 
         public bool Error = false;

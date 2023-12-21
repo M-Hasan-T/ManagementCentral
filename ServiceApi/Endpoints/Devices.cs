@@ -33,7 +33,8 @@ namespace DeviceApi.Endpoints
 
             devices.MapDelete("/device/delete/{DeviceId}", (int DeviceId) =>
             {
-                var Device = Collections.Devices.DeviceList.FirstOrDefault(device => device.DeviceId == DeviceId);
+                var Device = Collections.Devices.DeviceList
+                .FirstOrDefault(device => device.DeviceId == DeviceId);
                 if (Device != null)
                 {
                     Collections.Devices.DeviceList.Remove(Device);
@@ -41,7 +42,7 @@ namespace DeviceApi.Endpoints
                 }
                 else
                 {
-                    return Results.Problem("Error");
+                    return Results.NotFound("Could Not Delete!");
                 }
             });
         }

@@ -6,20 +6,23 @@ namespace ManagementCentral.Client.Pages
 {
     public partial class DeviceUpdate
     {
-        [Parameter]
-        public string DeviceId { get; set; } = string.Empty;
-
         [Inject]
         public IDeviceDataService DeviceDataService { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
+        [Parameter]
+        public int? DeviceId { get; set; }
+
         public Device Device { get; set; } = new Device();
 
         protected override void OnInitialized()
         {
-            Device = DeviceDataService.GetDevice(int.Parse(DeviceId));
+            if (DeviceId.HasValue)
+            {
+                Device = DeviceDataService.GetDevice(DeviceId.Value);
+            }
             base.OnInitialized();
         }
 
