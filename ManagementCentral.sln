@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementCentral.Server", "ManagementCentral\Server\ManagementCentral.Server.csproj", "{E5F2C0AC-B1B0-470F-B7BA-1FAEE320BEF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementCentral.Server", "ManagementCentral\Server\ManagementCentral.Server.csproj", "{E5F2C0AC-B1B0-470F-B7BA-1FAEE320BEF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementCentral.Client", "ManagementCentral\Client\ManagementCentral.Client.csproj", "{03BD52B4-8CBE-4C0C-A0E9-71FEF5B43677}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementCentral.Client", "ManagementCentral\Client\ManagementCentral.Client.csproj", "{03BD52B4-8CBE-4C0C-A0E9-71FEF5B43677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementCentral.Shared", "ManagementCentral\Shared\ManagementCentral.Shared.csproj", "{F19427D5-BD50-4BAA-9269-F9A8B704E9E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementCentral.Shared", "ManagementCentral\Shared\ManagementCentral.Shared.csproj", "{F19427D5-BD50-4BAA-9269-F9A8B704E9E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceApi", "ServiceApi\DeviceApi.csproj", "{C4993B72-E18D-49EA-B111-FFC4E27C3B70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeviceApi", "ServiceApi\DeviceApi.csproj", "{C4993B72-E18D-49EA-B111-FFC4E27C3B70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

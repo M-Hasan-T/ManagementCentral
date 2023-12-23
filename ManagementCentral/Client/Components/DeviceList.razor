@@ -18,7 +18,13 @@
             <th scope="col">Status</th>
             <th scope="col">View</th>
             <th scope="col">Update</th>
-            <th scope="col">Delete</th>           
+            <th scope="col">
+                <AuthorizeView Roles="Admin">
+                    <Authorized>
+                        Delete
+                    </Authorized>
+                </AuthorizeView>             
+             </th>           
         </tr>
     </thead>
     <tbody>
