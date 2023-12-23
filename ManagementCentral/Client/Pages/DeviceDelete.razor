@@ -4,14 +4,12 @@
 @attribute [Authorize(Roles ="Admin")]
 <h3>Delete Device</h3>
 
-@if (Error)
+@if (!string.IsNullOrEmpty(ErrorMessage))
 {
     <div class="alert alert-danger" role="alert">
-        Error reading from API!
+        @ErrorMessage
     </div>
 }
-
-StatusCode: @statusCode
 
 <table class="table">
     <thead>

@@ -12,31 +12,44 @@ namespace ManagementCentral.Client.Pages
 
         [Parameter]
         public int DeviceId { get; set; }
+
         public Device Device { get; set; } = new Device();
+
         public string responseData = string.Empty;
 
-        public bool Error = false;
+        public string ErrorMessage = string.Empty;
 
         protected override async Task OnInitializedAsync()
         {
-            var response = await Http.GetAsync("/device/" + DeviceId);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var options = new JsonSerializerOptions
+                var response = await Http.GetAsync("/device/" + DeviceId);
+                if (response.IsSuccessStatusCode)
                 {
-                    WriteIndented = true,
-                    PropertyNameCaseInsensitive = true,
-                };
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        PropertyNameCaseInsensitive = true
+                    };
 
-                responseData = await response.Content.ReadAsStringAsync();
-                if (!string.IsNullOrEmpty(responseData))
-                {
-                    Device = JsonSerializer.Deserialize<Device>(responseData, options);
+                    responseData = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseData))
+                    {
+                        Device = JsonSerializer.Deserialize<Device>(responseData, options);
+                    }
                 }
-
+                else
+                {
+                    ErrorMessage = "Could not read from API!" + response.StatusCode;
+                }
             }
-            else { Error = true; }
+            catch (Exception exeption)
+            {
+                ErrorMessage = exeption.Message;
+            }
+
             await base.OnInitializedAsync();
         }
+
     }
 }

@@ -1,10 +1,18 @@
 ﻿@page "/deviceadd"
 @inject HttpClient Http
 
+@attribute [Authorize(Roles = "Admin")]
+
 <h3>Add Device</h3>
 
 responseData: @responseData<br />
-statusCode: @statusCode
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ErrorMessage
+    </div>
+}
 
 <section class="device-edit">
     <EditForm Model="@Device" OnValidSubmit="HandleValidSubmit">

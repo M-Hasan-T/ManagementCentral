@@ -1,10 +1,10 @@
 ﻿@ExtraCaption
 @inject HttpClient Http
 
-@if(Error)
+@if (!string.IsNullOrEmpty(ErrorMessage))
 {
     <div class="alert alert-danger" role="alert">
-        Error reading from API!
+        @ErrorMessage
     </div>
 }
 

@@ -18,10 +18,11 @@ namespace ManagementCentral.Client.Components
 
         public List<Device> DeviceLst { get; set; } = new List<Device>();
         public string responseData = string.Empty;
-        public bool Error = false;
 
-        [CascadingParameter]
-        private Task<AuthenticationState> authenticationStateTask { get; set; }
+        public string ErrorMessage = string.Empty;
+
+        //[CascadingParameter]
+        //private Task<AuthenticationState> authenticationStateTask { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -31,21 +32,33 @@ namespace ManagementCentral.Client.Components
             //    return;
             //}
 
-            var response = await Http.GetAsync("/devices");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                responseData = await response.Content.ReadAsStringAsync();
+                var response = await Http.GetAsync("/devices");
 
-                var options = new JsonSerializerOptions
+                if (response.IsSuccessStatusCode)
                 {
-                    WriteIndented = true,
-                    PropertyNameCaseInsensitive = true,
-                };
+                    responseData = await response.Content.ReadAsStringAsync();
 
-                DeviceLst = (List<Device>)JsonSerializer
-                    .Deserialize<IEnumerable<Device>>(responseData, options);
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        PropertyNameCaseInsensitive = true,
+                    };
+
+                    DeviceLst = (List<Device>)JsonSerializer
+                        .Deserialize<IEnumerable<Device>>(responseData, options)!;
+                }
+                else
+                {
+                    ErrorMessage = "Could not get data from API! " +
+                        response.StatusCode;
+                }
             }
-            else { Error = true; }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
 
             await base.OnInitializedAsync();
         }

@@ -7,20 +7,28 @@
 
 <AuthorizeView Roles="Admin">
     <Authorized>
-        <h5>Hej Admin: @context.User.Identity?.Name!</h5> <br />
+        <h5>Hej Admin: @context.User.Identity?.Name!</h5><br />
         <h6>Hoppas du får en bra dag idag!</h6>
     </Authorized>
-    <NotAuthorized>
-        <h6>Inte inloggad!</h6>
-    </NotAuthorized>
 </AuthorizeView>
+
 
 <AuthorizeView Roles="User">
     <Authorized>
-        <h5>Hej User: @context.User.Identity?.Name!</h5> <br />
+        <h5>Hej User: @context.User.Identity?.Name!</h5><br />
         <h6>Hoppas du får en bra dag idag!</h6>
     </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Edit">
+    <Authorized>
+        <h5>Hej Edit: @context.User.Identity?.Name!</h5><br />
+        <h6>Hoppas du får en bra dag idag!</h6>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView>
     <NotAuthorized>
-        <h6>Inte inloggad!</h6>
+        Inte inloggad
     </NotAuthorized>
 </AuthorizeView>
