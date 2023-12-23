@@ -1,6 +1,7 @@
 ﻿@page "/devicedelete/{DeviceId:int}"
 @inject HttpClient Http
 
+@attribute [Authorize(Roles ="Admin")]
 <h3>Delete Device</h3>
 
 @if (Error)
@@ -34,5 +35,14 @@ StatusCode: @statusCode
 </table>
 
 <a href="@($"ListOfDevices")" class="btn btn-outline-primary">Back to Device List</a>
-<a class="btn btn-outline-primary" @onclick="()=>Delete()">Delete</a>
-<a class="btn btn-outline-primary" @onclick="()=>DeleteError()">Delete Error</a>
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <a class="btn btn-outline-primary" @onclick="()=>Delete()">Delete</a>
+        <a class="btn btn-outline-primary" @onclick="()=>DeleteError()">Delete Error</a>
+    </Authorized>
+    <NotAuthorized>
+        <br /><b>No Access to delete Devices!</b><br />
+    </NotAuthorized>
+</AuthorizeView>
+

@@ -1,11 +1,13 @@
 ﻿using ManagementCentral.Client.Services;
 using ManagementCentral.Shared.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using System.Net;
 using System.Text.Json;
 
 namespace ManagementCentral.Client.Pages
 {
+    [Authorize(Roles = "Admin")]
     public partial class DeviceDelete
     {
         [Inject]
